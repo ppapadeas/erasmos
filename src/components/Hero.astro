@@ -1,0 +1,148 @@
+---
+---
+
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-gradient"></div>
+  </div>
+
+  <div class="hero-content container">
+    <span class="pill">Από το 1995</span>
+    <h1 class="hero-title">
+      Εκπαιδευτική διαδικασία<br />
+      <span class="highlight">με επίκεντρο τον μαθητή</span>
+    </h1>
+    <p class="hero-subtitle">για να προηγείστε</p>
+    <div class="hero-actions">
+      <a href="#about" class="btn btn-outline">
+        Μάθετε Περισσότερα
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+      </a>
+      <a href="#contact" class="btn btn-primary">
+        Επικοινωνήστε
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0A2540 0%, #1B4B7A 50%, #0A2540 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    padding: 2rem 1.5rem;
+  }
+
+  .pill {
+    display: inline-block;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--gold);
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    padding: 0.4rem 1.2rem;
+    border-radius: var(--radius-pill);
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .hero-title {
+    color: white;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+    animation: fadeInUp 0.6s ease 0.2s forwards;
+    opacity: 0;
+  }
+
+  .highlight {
+    background: linear-gradient(135deg, #60A5FA, #93C5FD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    animation: fadeInUp 0.6s ease 0.4s forwards;
+    opacity: 0;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.6s ease 0.6s forwards;
+    opacity: 0;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+    .hero-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

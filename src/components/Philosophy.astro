@@ -1,0 +1,117 @@
+---
+const values = [
+  {
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    title: 'Ολιγομελή Τμήματα',
+    description: 'Εξασφαλίζουν σταθερή, συνεχή και ισόρροπη συμμετοχή όλων των μαθητών στη μαθησιακή διαδικασία.',
+  },
+  {
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>`,
+    title: 'Ομοιογενής Ομαδοποίηση',
+    description: 'Προωθεί τη συνεργασία και τον υγιή ανταγωνισμό για μέγιστη πρόοδο κάθε μαθητή.',
+  },
+  {
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    title: 'Σταθερός Πυρήνας',
+    description: 'Οι ιδρυτικοί εκπαιδευτικοί παραμένουν σταθεροί, συμπληρωμένοι από καταρτισμένους επαγγελματίες με κοινό όραμα.',
+  },
+  {
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+    title: 'Σχέση Εμπιστοσύνης',
+    description: 'Η αρμονική λειτουργία και οι ισχυρές σχέσεις με τους γονείς δημιουργούν ασφάλεια για την πρόοδο του μαθητή.',
+  },
+];
+---
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Η Φιλοσοφία μας</span>
+      <h2 class="section-title">Το Φροντιστήριο</h2>
+      <p class="section-subtitle">
+        Εκπαιδευτική αριστεία με επίκεντρο τον μαθητή. Πίστη στο μάθημα, κόπος και αγάπη.
+      </p>
+    </div>
+
+    <div class="values-grid">
+      {values.map((value, i) => (
+        <div class="value-card animate-on-scroll" data-delay={`${i * 0.1}s`}>
+          <div class="value-icon" set:html={value.icon} />
+          <h3 class="value-title">{value.title}</h3>
+          <p class="value-desc">{value.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .value-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .value-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    transform: scaleX(0);
+    transition: transform var(--transition);
+    transform-origin: left;
+  }
+
+  .value-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .value-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 37, 64, 0.06);
+    border-radius: 12px;
+    color: var(--primary);
+    margin-bottom: 1.25rem;
+  }
+
+  .value-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--primary);
+  }
+
+  .value-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .values-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

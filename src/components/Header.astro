@@ -1,0 +1,261 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+
+<header class="header" id="header">
+  <div class="header-inner container">
+    <a href="#hero" class="logo">
+      <img src={`${base}images/logo.png`} alt="Erasmos Frontistirio" width="50" height="50" />
+      <span class="logo-text">ERASMOS</span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#hero" class="nav-link">Αρχική</a>
+      <a href="#about" class="nav-link">Φροντιστήριο</a>
+      <a href="#curriculum" class="nav-link">Σπουδές</a>
+      <a href="#exams" class="nav-link">Πανελλαδικές</a>
+      <a href="#news" class="nav-link">Νέα</a>
+      <a href="#contact" class="nav-link">Επικοινωνία</a>
+    </nav>
+
+    <a href="#contact" class="btn btn-primary header-cta">Εγγραφή</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Μενού">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <nav class="mobile-nav">
+      <a href="#hero" class="mobile-link">Αρχική</a>
+      <a href="#about" class="mobile-link">Φροντιστήριο</a>
+      <a href="#curriculum" class="mobile-link">Σπουδές</a>
+      <a href="#exams" class="mobile-link">Πανελλαδικές</a>
+      <a href="#news" class="mobile-link">Νέα</a>
+      <a href="#contact" class="mobile-link">Επικοινωνία</a>
+      <a href="#contact" class="btn btn-primary" style="margin-top: 1rem;">Εγγραφή</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('header')!;
+  const hamburger = document.getElementById('hamburger')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const mobileLinks = mobileMenu.querySelectorAll('.mobile-link');
+
+  // Glassmorphism on scroll
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Mobile menu toggle
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+
+  // Close on link click
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Active section highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const top = (section as HTMLElement).offsetTop - 100;
+      if (window.scrollY >= top) {
+        current = section.id;
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: all var(--transition);
+    padding: 1rem 0;
+  }
+
+  .header.scrolled {
+    background: rgba(10, 37, 64, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 0.6rem 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10;
+  }
+
+  .logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .logo-text {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: white;
+    letter-spacing: 0.05em;
+  }
+
+  .nav {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-pill);
+    transition: all var(--transition);
+    position: relative;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .header-cta {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.4rem;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 10;
+    padding: 0.5rem;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all var(--transition);
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 37, 64, 0.95);
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition);
+    z-index: 5;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .mobile-link {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.75rem 2rem;
+    transition: all var(--transition);
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  .mobile-menu.open .mobile-link {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .mobile-menu.open .mobile-link:nth-child(1) { transition-delay: 0.1s; }
+  .mobile-menu.open .mobile-link:nth-child(2) { transition-delay: 0.15s; }
+  .mobile-menu.open .mobile-link:nth-child(3) { transition-delay: 0.2s; }
+  .mobile-menu.open .mobile-link:nth-child(4) { transition-delay: 0.25s; }
+  .mobile-menu.open .mobile-link:nth-child(5) { transition-delay: 0.3s; }
+  .mobile-menu.open .mobile-link:nth-child(6) { transition-delay: 0.35s; }
+
+  .mobile-link:hover {
+    color: white;
+  }
+
+  @media (max-width: 900px) {
+    .nav, .header-cta {
+      display: none;
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+</style>
